@@ -119,6 +119,7 @@ def read_md(file_path):
     content = ""
     metadata = {}
     with open(file_path) as f:
+        print('--f--', f)
         post = frontmatter.load(f)
         content = post.content
         metadata = post.metadata
@@ -248,7 +249,8 @@ def main():
     # 读取_posts目录中的md文件列表
     md_list = get_md_list(os.path.join(os.getcwd(), "_posts"))
 
-    for md in md_list:
+    for index, md in enumerate(md_list):
+        print("当前进度==", index, "总数量", len(md_list))
         # 计算md文件的sha1值，并与md_sha1_dic做对比
         sha1_key = os.path.basename(md).split(".")[0]
         sha1_value = get_sha1(md)
